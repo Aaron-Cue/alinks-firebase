@@ -33,6 +33,7 @@ module.exports = {
       }
     ],
     'simple-import-sort/exports': 'warn',
-    'react/prop-types': 'off'
+    'react/prop-types': 'off',
+    'no-unused-vars': ['warn']
   }
 }

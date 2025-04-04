@@ -1,18 +1,14 @@
-import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { onAuthStateChanged } from 'firebase/auth'
 import { doc, getDoc, setDoc } from 'firebase/firestore'
-import {
-  auth,
-  handleUserStateChanged,
-  loginWithGoogle,
-  logout
-} from '../firebase/auth'
+import { loginWithGoogle, logout } from '../firebase/auth'
 import db from '../firebase/firestore'
+import useAuth from '../hooks/useAuth'
 
 export default function Login() {
-  const [currentUser, setCurrentUser] = useState(null)
+  const { currentUser } = useAuth()
+
   const navigate = useNavigate()
+
   const handleLogin = async () => {
     try {
       const user = await loginWithGoogle()
@@ -20,7 +16,6 @@ export default function Login() {
 
       const userRef = doc(db, 'users', user.uid)
       const userSnap = await getDoc(userRef)
-
       if (!userSnap.exists()) {
         // si el user no esta registrado, lo registramos
         // guardar el usuario en la bbdd firestore
@@ -41,15 +36,6 @@ export default function Login() {
       console.error('Error al iniciar sesion:', error)
     }
   }
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, user => {
-      setCurrentUser(user)
-      handleUserStateChanged(user)
-    })
-
-    return () => unsubscribe()
-  }, [])
 
   return (
     <div>

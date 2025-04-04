@@ -1,4 +1,9 @@
-import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth'
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signOut
+} from 'firebase/auth'
 import app from './config.js'
 
 export const auth = getAuth(app)
@@ -7,9 +12,11 @@ const provider = new GoogleAuthProvider()
 export const loginWithGoogle = async () => {
   try {
     const res = await signInWithPopup(auth, provider)
-    console.log('Usuario:', res.user)
+    const user = res.user
+    return user
   } catch (error) {
     console.error('Error al iniciar sesion:', error)
+    return null
   }
 }
 
@@ -22,7 +29,7 @@ export const logout = async () => {
   }
 }
 
-export const handleUserStateChanged = (user) => {
+export const handleUserStateChanged = user => {
   if (user) {
     console.log('Usuario:', user.displayName)
   } else {

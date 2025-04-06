@@ -23,9 +23,10 @@ export const loginWithGoogle = async () => {
 export const logout = async () => {
   try {
     await signOut(auth)
-    console.log('Sesion cerrada')
+    return true
   } catch (error) {
     console.error('Error al cerrar sesion:', error)
+    return false
   }
 }
 

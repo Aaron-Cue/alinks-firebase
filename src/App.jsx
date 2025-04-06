@@ -1,20 +1,14 @@
-import { useNavigate } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify'
+import AppRoutes from './routes/index'
 
+import 'react-toastify/dist/ReactToastify.css'
 import './App.css'
 
 function App() {
-  const navigate = useNavigate()
-
   return (
     <>
-      <header>
-        Quiero mis A-links
-        <button
-          onClick={() => { navigate('/login') }}>
-          Crear Cuenta
-        </button>
-      </header>
-      <h1>alinks App</h1>
+      <AppRoutes />
+      <ToastContainer />
     </>
   )
 }

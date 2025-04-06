@@ -2,6 +2,7 @@ import { toast } from 'react-toastify'
 import HeaderDashboard from '../components/HeaderDashboard'
 import { updateUser } from '../firebase/firestore.js'
 import useAuth from '../hooks/useAuth.js'
+import { uploadImageToCloudinary } from '../services/cloudinary'
 
 export default function EditProfile() {
   const { currentUser } = useAuth()
@@ -15,7 +16,7 @@ export default function EditProfile() {
     await updateUser(currentUser, { username: newUsername })
   }
 
-  const handleSubmitChangePhoto = e => {
+  const handleSubmitChangePhoto = async e => {
     e.preventDefault()
     const file = e.target[0].files[0]
 
@@ -33,7 +34,13 @@ export default function EditProfile() {
       return
     }
 
-    // subir foto a firebase storage y actualizar el user en firestore
+    // subir foto a cloudinary y actualizar photoUrl en el user de firestore
+    const url = await uploadImageToCloudinary(file)
+    if (!url) {
+      console.error('Error uploading image')
+    }
+
+    await updateUser(currentUser, { photoURL: url })
   }
 
   return (
@@ -44,7 +51,9 @@ export default function EditProfile() {
       <section>
         <h2>Username </h2>
         <p>{currentUser.username}</p>
-        <img src={currentUser.photoURL} alt="your profile image" />
+        <div>
+          <img src={currentUser.photoURL} alt="your profile image" />
+        </div>
       </section>
 
       {currentUser && (

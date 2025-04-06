@@ -54,7 +54,11 @@ export const updateUser = async (user, data) => {
       ...data
     })
 
-    toast.success('Links updated', {position: 'bottom-right', autoClose: 1800, theme: 'dark'})
+    toast.success('successful update', {
+      position: 'bottom-right',
+      autoClose: 1800,
+      theme: 'dark'
+    })
   } catch (error) {
     toast.error('Hubo un error al actualizar. Intenta de nuevo.', {position: 'bottom-right'})
     console.error('Error updating user:', error)

@@ -86,4 +86,24 @@ export const getLinksUser = async user => {
   }
 }
 
+export const getUser = async username => {
+  try {
+    const usersRef = collection(db, 'users')
+    const q = query(usersRef, where('username', '==', username))
+    const querySnap = await getDocs(q)
+
+    if (querySnap.empty) {
+      return null
+    }
+
+    const userDoc = querySnap.docs[0]
+    const userData = userDoc.data()
+
+    return userData
+  } catch (error) {
+    console.error('Error getting user:', error)
+    return null
+  }
+}
+
 export default db

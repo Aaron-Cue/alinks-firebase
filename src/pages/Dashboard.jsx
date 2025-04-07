@@ -52,7 +52,7 @@ export default function Dashboard() {
     <>
       <HeaderDashboard />
       <div>
-        <h1>Hola, {currentUser.username}</h1>
+        <h1>Hola, {currentUser?.username}</h1>
       </div>
 
       <form onSubmit={handleSubmitCreateLink}>

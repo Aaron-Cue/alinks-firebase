@@ -28,6 +28,11 @@ export const usernameAvailable = async username => {
   }
 }
 
+export const usernameExists = async username => {
+  const res = await usernameAvailable(username)
+  return !res
+}
+
 export const registerUser = async (user, username) => {
   try {
     const userRef = doc(db, 'users', user.uid)

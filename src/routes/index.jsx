@@ -6,6 +6,7 @@ import Inicio from '../pages/Inicio'
 import Login from '../pages/Login'
 import NotFound from '../pages/NotFound'
 import PublicProfile from '../pages/PublicProfile'
+import UserNotFound from '../pages/UserNotFound'
 
 export default function AppRoutes() {
   return (
@@ -14,8 +15,9 @@ export default function AppRoutes() {
       <Route path="/login" element={<Login />} />
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/dashboard/profile" element={<EditProfile />} />
-      <Route path="u/:username" element={<PublicProfile />} />
+      <Route path="user/:username" element={<PublicProfile />} />
       <Route path="choose-username" element={<ChooseUsername />} />
+      <Route path="user/notFound" element={<UserNotFound />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   )

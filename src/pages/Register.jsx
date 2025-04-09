@@ -4,7 +4,7 @@ import useAuth from '../hooks/useAuth'
 
 export default function ChooseUsername() {
   const navigate = useNavigate()
-  const { currentUser } = useAuth()
+  const { currentUser, loading } = useAuth()
 
   const handleSubmit = async e => {
     e.preventDefault()
@@ -28,6 +28,10 @@ export default function ChooseUsername() {
 
     //  y redirigir a dashboard
     navigate('/dashboard')
+  }
+
+  if (loading) {
+    return <p>Cargando...</p>
   }
 
   return (

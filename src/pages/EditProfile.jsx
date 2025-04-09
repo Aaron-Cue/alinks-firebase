@@ -5,8 +5,7 @@ import useAuth from '../hooks/useAuth.js'
 import { uploadImageToCloudinary } from '../services/cloudinary'
 
 export default function EditProfile() {
-  const { currentUser } = useAuth()
-  console.log(currentUser.username)
+  const { currentUser, loading } = useAuth()
 
   const handleSubmitChangeUsername = async e => {
     e.preventDefault()
@@ -41,6 +40,10 @@ export default function EditProfile() {
     }
 
     await updateUser(currentUser, { photoURL: url })
+  }
+
+  if (loading) {
+    return <p>Cargando...</p>
   }
 
   return (

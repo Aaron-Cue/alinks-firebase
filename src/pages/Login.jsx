@@ -16,7 +16,7 @@ export default function Login() {
 
       if (!userSnap.exists()) {
         // redireccionar a chooseUsername
-        navigate('/choose-username')
+        navigate('/register')
         return
       }
       // aqui el user esta registrado e hizo login

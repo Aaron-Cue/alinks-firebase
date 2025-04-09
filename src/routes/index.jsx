@@ -16,7 +16,7 @@ export default function AppRoutes() {
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/dashboard/profile" element={<EditProfile />} />
       <Route path="user/:username" element={<PublicProfile />} />
-      <Route path="choose-username" element={<ChooseUsername />} />
+      <Route path="register" element={<ChooseUsername />} />
       <Route path="user/notFound" element={<UserNotFound />} />
       <Route path="*" element={<NotFound />} />
     </Routes>

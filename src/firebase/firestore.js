@@ -38,7 +38,7 @@ export const registerUser = async (user, username) => {
     const userRef = doc(db, 'users', user.uid)
 
     await setDoc(userRef, {
-      username: username,
+      username: username.toLowerCase(),
       displayName: user.displayName,
       email: user.email,
       photoURL: user.photoURL,

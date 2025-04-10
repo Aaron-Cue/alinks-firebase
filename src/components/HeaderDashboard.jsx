@@ -1,12 +1,15 @@
+import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { logout } from '../firebase/auth'
 
 export default function HeaderDashboard() {
+  const [disabled, setDisabled] = useState(false)
   const navigate = useNavigate()
 
   const handleLogout = async () => {
     try {
+      setDisabled(true)
       const result = await logout()
       if (result) {
         toast.success('Sesión cerrada correctamente', {
@@ -16,8 +19,9 @@ export default function HeaderDashboard() {
           closeOnClick: true,
           pauseOnHover: false,
           draggable: false,
-          theme: 'dark',
+          theme: 'dark'
         })
+        setDisabled(false)
         setTimeout(() => {
           navigate('/login')
         }, 1500)
@@ -40,7 +44,9 @@ export default function HeaderDashboard() {
           </li>
         </ul>
       </nav>
-      <button onClick={handleLogout}>Cerrar sesion</button>
+      <button onClick={handleLogout} disabled={disabled}>
+        Cerrar sesion
+      </button>
     </header>
   )
 }

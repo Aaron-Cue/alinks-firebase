@@ -15,7 +15,7 @@ export default function EditProfile() {
     const res = await updateUser(currentUser, { username: newUsername })
    
     if (res) setCurrentUser({ ...currentUser, username: newUsername })
-    console.error('Error updating username')
+    else console.error('Error updating username')
   }
 
   const handleSubmitChangePhoto = async e => {
@@ -43,6 +43,7 @@ export default function EditProfile() {
     }
 
     await updateUser(currentUser, { photoURL: url })
+    setCurrentUser({ ...currentUser, photoURL: url })
   }
 
   if (loading) {

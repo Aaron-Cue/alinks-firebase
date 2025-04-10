@@ -1,4 +1,5 @@
 import { Route, Routes } from 'react-router-dom'
+import AccessRoute from '../components/AccessRoute'
 import Dashboard from '../pages/Dashboard'
 import EditProfile from '../pages/EditProfile'
 import Inicio from '../pages/Inicio'
@@ -12,11 +13,39 @@ export default function AppRoutes() {
   return (
     <Routes>
       <Route path="/" element={<Inicio />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/dashboard" element={<Dashboard />} />
-      <Route path="/dashboard/profile" element={<EditProfile />} />
+      <Route
+        path="/login"
+        element={
+          <AccessRoute type="public">
+            <Login />
+          </AccessRoute>
+        }
+      />
+      <Route
+        path="/dashboard"
+        element={
+          <AccessRoute type="private">
+            <Dashboard />
+          </AccessRoute>
+        }
+      />
+      <Route
+        path="/dashboard/profile"
+        element={
+          <AccessRoute type="private">
+            <EditProfile />
+          </AccessRoute>
+        }
+      />
       <Route path="user/:username" element={<PublicProfile />} />
-      <Route path="register" element={<Register />} />
+      <Route
+        path="register"
+        element={
+          <AccessRoute type="both">
+            <Register />
+          </AccessRoute>
+        }
+      />
       <Route path="user/notFound" element={<UserNotFound />} />
       <Route path="*" element={<NotFound />} />
     </Routes>

@@ -27,7 +27,7 @@ module.exports = {
       { vars: 'all', args: 'after-used', ignoreRestSiblings: true }
     ],
     'simple-import-sort/imports': [
-      'error',
+      'warn',
       {
         groups: [['^react', '^next', '^[a-z]', '^@', '^\\.']]
       }

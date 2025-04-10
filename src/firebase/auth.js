@@ -29,11 +29,3 @@ export const logout = async () => {
     return false
   }
 }
-
-export const handleUserStateChanged = user => {
-  if (user) {
-    console.log('Usuario:', user.displayName)
-  } else {
-    console.log('No hay usuario autenticado')
-  }
-}

@@ -5,14 +5,17 @@ import useAuth from '../hooks/useAuth.js'
 import { uploadImageToCloudinary } from '../services/cloudinary'
 
 export default function EditProfile() {
-  const { currentUser, loading } = useAuth()
+  const { currentUser, setCurrentUser, loading } = useAuth()
 
   const handleSubmitChangeUsername = async e => {
     e.preventDefault()
     const newUsername = e.target[0].value
 
-    // actualizar el username en firestore
-    await updateUser(currentUser, { username: newUsername })
+    // actualizar el username en firestore y en el estado de currentUser
+    const res = await updateUser(currentUser, { username: newUsername })
+   
+    if (res) setCurrentUser({ ...currentUser, username: newUsername })
+    console.error('Error updating username')
   }
 
   const handleSubmitChangePhoto = async e => {

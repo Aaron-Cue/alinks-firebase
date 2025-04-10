@@ -1,10 +1,11 @@
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import { registerUser, usernameAvailable } from '../firebase/firestore'
 import useAuth from '../hooks/useAuth'
 
-export default function ChooseUsername() {
+export default function Register() {
   const navigate = useNavigate()
-  const { currentUser, loading } = useAuth()
+  const { currentUser, setCurrentUser, loading } = useAuth()
 
   const handleSubmit = async e => {
     e.preventDefault()
@@ -15,16 +16,26 @@ export default function ChooseUsername() {
     // chequear que el username no este en uso.
     const available = await usernameAvailable(username)
     if (!available) {
-      // mostrar error de username no disponible
+      toast.error('El nombre de usuario ya está en uso.', {
+        position: 'top-center',
+        autoClose: 2000,
+        theme: 'dark'
+      })
       return
     }
 
-    // si no esta en uso, registrar el user en firestore
+    // si no esta en uso, registrar el user en firestore y actualizar el estado de currentUser
     const result = await registerUser(currentUser, username)
     if (!result) {
-      // mostrar error de registro
+      toast.error('Error al registrar el usuario.', {
+        position: 'top-center',
+        autoClose: 2000,
+        theme: 'dark'
+      })
       return
     }
+
+    setCurrentUser({ ...currentUser, username })
 
     //  y redirigir a dashboard
     navigate('/dashboard')

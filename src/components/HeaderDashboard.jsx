@@ -19,7 +19,7 @@ export default function HeaderDashboard() {
           theme: 'dark',
         })
         setTimeout(() => {
-          navigate('/')
+          navigate('/login')
         }, 1500)
       }
     } catch (error) {

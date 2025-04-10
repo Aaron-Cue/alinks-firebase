@@ -10,7 +10,8 @@ export default function PublicProfile() {
   const [user, setUser] = useState(null)
 
   useEffect(() => {
-    usernameExists(username).then(res => setExists(res))
+    const lowerUsername = username.toLowerCase()
+    usernameExists(lowerUsername).then(res => setExists(res))
 
     getUser(username).then(res => {
       setUser(res)

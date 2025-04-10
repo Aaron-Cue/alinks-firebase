@@ -39,9 +39,9 @@ export default function AppRoutes() {
       />
       <Route path="user/:username" element={<PublicProfile />} />
       <Route
-        path="register"
+        path="/register"
         element={
-          <AccessRoute type="both">
+          <AccessRoute type="register">
             <Register />
           </AccessRoute>
         }

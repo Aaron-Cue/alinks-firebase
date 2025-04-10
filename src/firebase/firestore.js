@@ -53,8 +53,22 @@ export const registerUser = async (user, username) => {
 
 export const updateUser = async (user, data) => {
   try {
-    const userRef = doc(db, 'users', user.uid)
 
+    if (data.username) {
+      // chequear si esta disponible
+      const available = await usernameAvailable(data.username)
+      if (!available) {
+        toast.error('El nombre de usuario ya está en uso.', {
+          position: 'bottom-right',
+          autoClose: 1800,
+          theme: 'dark'
+        })
+        return false
+      }
+    }
+    
+    const userRef = doc(db, 'users', user.uid)
+    
     await updateDoc(userRef, {
       ...data
     })
@@ -64,9 +78,11 @@ export const updateUser = async (user, data) => {
       autoClose: 1800,
       theme: 'dark'
     })
+    return true
   } catch (error) {
     toast.error('Hubo un error al actualizar. Intenta de nuevo.', {position: 'bottom-right'})
     console.error('Error updating user:', error)
+    return false
   }
 }
 
@@ -75,11 +91,11 @@ export const getLinksUser = async user => {
     const userRef = doc(db, 'users', user.uid)
     const userSnap = await getDoc(userRef)
     const userData = userSnap.data()
-    if (!userData.links) {
+    if (!userData?.links) {
       return []
     }
 
-    return userData.links
+    return userData?.links
   } catch (error) {
     console.error('Error getting user links:', error)
     return []

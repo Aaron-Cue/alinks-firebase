@@ -1,8 +1,22 @@
-# React + Vite
+# 🔗 A-Links App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**A-Links** es una aplicación web construida con **React** y **Firebase** que permite a los usuarios registrarse, agregar enlaces personales y compartir un perfil público con sus links destacados.
 
-Currently, two official plugins are available:
+## ⚙️ Tecnologías utilizadas
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- ⚛️ [React](https://reactjs.org/)
+- 🔥 [Firebase](https://firebase.google.com/)
+  - Firebase Authentication
+  - Firestore Database
+- ☁️ [Cloudinary](https://cloudinary.com/) para subir y almacenar imágenes de perfil
+- 🌐 [React Router DOM](https://reactrouter.com/) para el manejo de rutas
+- 🌐 [react-toastify](https://www.npmjs.com/package/react-toastify) para notificaciones push
+
+## ✨ Funcionalidades
+
+- 🔐 Login con autorregistro 
+- 📎 Agregar y gestionar tus propios links
+- 🌍 Link público para compartir tu perfil y enlaces -> alinks-firebase.vercel.app/user/YOUR_USER
+- 🧑‍🎨 Editar perfil
+- 🧭 Navegación protegida según estado de autenticación
+- 🔄 Persistencia de sesión

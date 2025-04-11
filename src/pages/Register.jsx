@@ -1,14 +1,22 @@
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import Button from '../components/Button'
 import { registerUser, usernameAvailable } from '../firebase/firestore'
 import useAuth from '../hooks/useAuth'
+
+import '../styles/Register.css'
 
 export default function Register() {
   const navigate = useNavigate()
   const { currentUser, setCurrentUser, loading } = useAuth()
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleSubmit = async e => {
     e.preventDefault()
+
+    setIsLoading(true)
+
     const form = e.target
     const formData = new FormData(form)
     const username = formData.get('username')
@@ -16,6 +24,7 @@ export default function Register() {
     // chequear que el username no este en uso.
     const available = await usernameAvailable(username)
     if (!available) {
+      setIsLoading(false)
       toast.error('El nombre de usuario ya está en uso.', {
         position: 'top-center',
         autoClose: 2000,
@@ -32,9 +41,11 @@ export default function Register() {
         autoClose: 2000,
         theme: 'dark'
       })
+      setIsLoading(false)
       return
     }
 
+    setIsLoading(false)
     setCurrentUser({ ...currentUser, username })
 
     //  y redirigir a dashboard
@@ -46,20 +57,25 @@ export default function Register() {
   }
 
   return (
-    <>
-      <h1>Elige tu nombre de usuario</h1>
+    <main className="container">
+      <h1 className="login-h1">Elige tu nombre de usuario</h1>
       <form onSubmit={handleSubmit}>
-        <input
-          name="username"
-          type="text"
-          required
-          minLength={3}
-          maxLength={20}
-          pattern="^[A-Za-z]+( [A-Za-z]+)*$"
-          title="Solo letras y espacios entre palabras."
-        />
-        <button type="submit">Continuar</button>
+        <div className="input-container">
+          <input
+            name="username"
+            type="text"
+            placeholder="Usuario"
+            required
+            minLength={3}
+            maxLength={20}
+            pattern="^[A-Za-z]+( [A-Za-z]+)*$"
+            title="Solo letras y espacios entre palabras."
+          />
+        </div>
+        <Button disabled={isLoading}>
+          {isLoading ? 'Verificando...' : 'Continuar'}
+        </Button>
       </form>
-    </>
+    </main>
   )
 }

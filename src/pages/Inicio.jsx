@@ -1,9 +1,13 @@
 import { useNavigate } from 'react-router-dom'
+import Button from '../components/Button'
 
 import '../styles/Inicio.css'
 
 export default function Inicio() {
   const navigate = useNavigate()
+  const handleClickGoLogin = () => {
+    navigate('/login')
+  }
 
   return (
     <>
@@ -13,9 +17,7 @@ export default function Inicio() {
             <img src="src/assets/logo.png" alt="" />
             A-Links
           </div>
-          <button className="inicio-button" onClick={() => navigate('/login')}>
-            <span className="button_top"> Crear Cuenta </span>
-          </button>
+          <Button onClick={handleClickGoLogin}>Iniciar Sesion</Button>
         </div>
       </header>
       <main className="container main-inicio">
@@ -26,14 +28,7 @@ export default function Inicio() {
           <p>
             <i>Quiero obtener mis links</i>
           </p>
-          <button
-            className="inicio-button"
-            onClick={() => {
-              navigate('/login')
-            }}
-          >
-            <span className="button_top"> Obtener </span>
-          </button>
+          <Button onClick={handleClickGoLogin}>Crear Cuenta</Button>
         </div>
         <div className="screen">
           <img src="/src/assets/imageApp.webp" alt="" />

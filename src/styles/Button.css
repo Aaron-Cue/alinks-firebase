@@ -1,0 +1,32 @@
+.button {
+  font-size: 17px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  border-radius: 0.75em;
+  background: #000000;
+}
+
+.button_top {
+  display: block;
+  border: 2px solid #000000;
+  border-radius: 0.75em;
+  padding: 0.5em 1.25em;
+  background: #e8e8e8;
+  color: #000000;
+  transform: translateY(-0.15em);
+  transition: transform 0.1s ease;
+}
+
+.button:hover .button_top {
+  transform: translateY(-0.22em);
+}
+
+.button:active .button_top {
+  transform: translateY(0);
+}
+
+.disabled {
+  background-color: grey;
+  color: rgb(37, 37, 37);
+}

@@ -57,34 +57,6 @@
   font-size: 1.2em;
 }
 
-.inicio-button {
-  font-size: 17px;
-  font-weight: bold;
-  border: none;
-  cursor: pointer;
-  border-radius: 0.75em;
-  background: #000000;
-}
-
-.button_top {
-  display: block;
-  border: 2px solid #000000;
-  border-radius: 0.75em;
-  padding: 0.5em 1.25em;
-  background: #e8e8e8;
-  color: #000000;
-  transform: translateY(-0.15em);
-  transition: transform 0.1s ease;
-}
-
-.inicio-button:hover .button_top {
-  transform: translateY(-0.22em);
-}
-
-.inicio-button:active .button_top {
-  transform: translateY(0);
-}
-
 .inicio-content p {
   margin: 10px 0;
 }

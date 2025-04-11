@@ -1,3 +1,8 @@
+import '../styles/NotFound.css'
+
 export default function NotFound() {
-  return <div>NotFound</div>
+  return <main className="container">
+    <h1 className="login-h1">Página no encontrada</h1>
+    <img className="image-404" src="/src/assets/404.png" alt="" />
+  </main>
 }

@@ -1,0 +1,38 @@
+.link-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 8px 16px;
+  background: rgba(69, 28, 145, 0.685);
+  border-radius: 14px;
+  gap: 70px;
+  min-width: 0;
+}
+
+.link-card div {
+  text-align: left;
+  flex: 1;
+  width: 70%;
+  min-width: 0;
+  max-width: 1080px;
+}
+
+.link-card div h4 {
+  font-size: 1.3rem;
+}
+
+.link-card div p {
+  font-style: italic;
+  color: rgb(182, 182, 182);
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.links-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}

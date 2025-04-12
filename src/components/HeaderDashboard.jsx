@@ -3,6 +3,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { logout } from '../firebase/auth'
 
+import '../styles/HeaderDashboard.css'
+
 export default function HeaderDashboard() {
   const [disabled, setDisabled] = useState(false)
   const navigate = useNavigate()
@@ -33,20 +35,26 @@ export default function HeaderDashboard() {
   }
 
   return (
-    <header>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/dashboard">Links</Link>
-          </li>
-          <li>
-            <Link to="/dashboard/profile">Edit Profile</Link>
-          </li>
-        </ul>
-      </nav>
-      <button onClick={handleLogout} disabled={disabled}>
-        Cerrar sesion
-      </button>
+    <header className="header-dashboard">
+      <div className="header-dashboard_content">
+        <nav>
+          <ul className='header-dashboard_ul'>
+            <li>
+              <Link to="/dashboard">Links</Link>
+            </li>
+            <li>
+              <Link to="/dashboard/profile">Edit Profile</Link>
+            </li>
+          </ul>
+        </nav>
+        <button
+          onClick={handleLogout}
+          disabled={disabled}
+          className="btn-logout"
+        >
+          <span>Cerrar sesion</span>
+        </button>
+      </div>
     </header>
   )
 }

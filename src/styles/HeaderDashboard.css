@@ -1,0 +1,63 @@
+.header-dashboard {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  background-color: #5856d6ef;
+}
+
+.header-dashboard_content {
+  max-width: 1000px;
+  min-width: 360px;
+  height: 60px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+.btn-logout {
+  cursor: pointer;
+  border: none;
+  padding: 0.5rem 1rem;
+  margin: 0;
+  font-family: inherit;
+  display: inline-block;
+  letter-spacing: 0.05rem;
+  font-weight: bold;
+  font-size: 14px;
+  border-radius: 500px;
+  overflow: hidden;
+  background: #000;
+  color: ghostwhite;
+}
+
+.btn-logout span {
+  position: relative;
+  z-index: 10;
+  transition: color 0.3s;
+}
+
+.btn-logout:hover span {
+  color: rgb(145, 145, 145);
+}
+
+.header-dashboard_ul {
+  display: flex;
+  gap: 7px;
+}
+
+.header-dashboard_ul li a{
+  color: rgb(230, 190, 253);
+  padding: 6px;
+}
+
+.header-dashboard_ul li a:hover {
+  background-color: rgba(170, 170, 170, 0.2);
+  border-radius: 6px;
+}

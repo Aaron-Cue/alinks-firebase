@@ -4,7 +4,7 @@ import useAuth from '../hooks/useAuth'
 export default function AccessRoute({ type, children }) {
   const { currentUser, loading } = useAuth()
 
-  if (loading) return <h1>Cargando...</h1>
+  if (loading) return <main className='container'>Cargando...</main>
   
 
   switch (type) {

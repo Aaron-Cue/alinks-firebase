@@ -53,7 +53,7 @@ export default function Register() {
   }
 
   if (loading) {
-    return <p>Cargando...</p>
+    return <main className='container'>Cargando...</main>
   }
 
   return (

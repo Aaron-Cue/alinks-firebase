@@ -15,7 +15,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 1rem;
+  padding: 0px 1rem;
 }
 
 .logo {
@@ -40,8 +40,14 @@
   grid-template-columns: 1fr 1fr;
 }
 
+.screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .screen img {
-  min-width: 360px;
+  min-width: 500px;
   width: 100%;
   height: auto;
 }

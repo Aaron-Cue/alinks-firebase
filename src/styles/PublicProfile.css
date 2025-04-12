@@ -8,7 +8,7 @@
   align-items: center;
   background-color: #1e1e2f;
   border-radius: 12px;
-  padding: 1rem 1.25rem;
+  padding: 0.86rem 1.1rem;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
   margin-bottom: 1rem;
   text-decoration: none;
@@ -26,7 +26,7 @@
 }
 
 .public-link-title {
-  font-size: 1.2rem;
+  font-size: 1.14rem;
   font-weight: 600;
   color: #ffffff;
 }

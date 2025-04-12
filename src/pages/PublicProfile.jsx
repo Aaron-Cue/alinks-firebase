@@ -2,19 +2,21 @@ import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { getUser, usernameExists } from '../firebase/firestore'
 
+import '../styles/PublicProfile.css'
+
 export default function PublicProfile() {
   const navigate = useNavigate()
   const { username } = useParams()
 
   const [exists, setExists] = useState(null)
   const [user, setUser] = useState(null)
-
+  console.log(user?.links)
   useEffect(() => {
     const lowerUsername = username.toLowerCase()
-    
+
     usernameExists(lowerUsername).then(res => {
-      setExists(res) 
-      console.log('res',res)
+      setExists(res)
+      console.log('res', res)
     })
 
     if (exists === false) {
@@ -26,27 +28,39 @@ export default function PublicProfile() {
     })
   }, [username, exists, navigate])
 
-  
+  const normalizeUrl = url => {
+    if (url.startsWith('https://')) {
+      return url
+    } else if (url.startsWith('www')) {
+      return `https://${url}`
+    }
+    return `https://www.${url}`
+  }  
 
   // mostrar si hay datos
   if (user) {
     return (
-      <main>
-        <h1>{user?.username}</h1>
-        <div>
-          <img src={user?.photoURL} alt="profile img" />
+      <>
+        <div className="center">
+          <img className="img-profile" src={user?.photoURL} alt="profile img" />
         </div>
-        <section>
-          {user?.links.map(link => (
-            <div key={link.id}>
-              <h2>{link.title}</h2>
-              <a href={link.url} target="_blank" rel="noopener noreferrer">
-                {link.url}
+        <h1 className="h1-public">{user?.username}</h1>
+        <main className="container">
+          <section className="container">
+            {user?.links.map(link => (
+              <a
+                key={link.id}
+                href={normalizeUrl(link.url)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="public-link-card"
+              >
+                <h2 className="public-link-title">{link.title}</h2>
               </a>
-            </div>
-          ))}
-        </section>
-      </main>
+            ))}
+          </section>
+        </main>
+      </>
     )
   }
 }

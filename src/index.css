@@ -53,6 +53,10 @@ h3 {
   margin-top: 30px;
 }
 
+.center {
+  text-align: center;
+}
+
 .container {
   max-width: 1020px;
   width: 100%;

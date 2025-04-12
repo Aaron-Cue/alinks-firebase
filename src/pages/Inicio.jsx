@@ -14,7 +14,7 @@ export default function Inicio() {
       <header className="header-inicio">
         <div className="header-content">
           <div className="logo">
-            <img src="src/assets/logo.png" alt="" />
+            <img src="/assets/logo.png" alt="" />
             A-Links
           </div>
           <Button onClick={handleClickGoLogin}>Iniciar Sesion</Button>
@@ -31,7 +31,7 @@ export default function Inicio() {
           <Button onClick={handleClickGoLogin}>Crear Cuenta</Button>
         </div>
         <div className="screen">
-          <img src="/src/assets/imageApp.webp" alt="" />
+          <img src="/assets/imageApp.webp" alt="" />
         </div>
       </main>
     </>

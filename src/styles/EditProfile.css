@@ -1,0 +1,90 @@
+.img-profile {
+  width: 135px;
+  height: 135px;
+  border-radius: 50%;
+  margin: 6px;
+}
+
+h2 {
+  font-size: 1.8rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+  max-width: 500px;
+}
+
+.form-label {
+  text-align: left;
+  font-size: 0.875rem;
+  color: #9ca3af;
+  font-weight: 500;
+}
+
+.input-button-row {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  width: 100%;
+}
+
+.dashboard-input,
+input[type="file"] {
+  flex: 1;
+  height: 2.5rem;
+  border-radius: 0.375rem;
+  border: 1px solid #d1d5db;
+  background-color: #fff;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  color: #111;
+}
+
+input[type="file"] {
+  color: #9ca3af;
+}
+
+input[type="file"]::file-selector-button {
+  border: none;
+  background: transparent;
+  color: #4b5563;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.form-inline:first-child {
+  margin-bottom: 16px;
+}
+
+.button-profile {
+  font-size: 1rem;
+  color: #fafafa;
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: 2px solid #fafafa;
+  background: #252525;
+  box-shadow: 2px 2px #fafafa;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+  white-space: nowrap;
+}
+
+.button-profile:active {
+  box-shadow: none;
+  transform: translate(2px, 2px);
+}
+
+.input-username-profile {
+  margin: 0;
+}
+
+.section-profile {
+  display: flex;
+  place-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem;
+}

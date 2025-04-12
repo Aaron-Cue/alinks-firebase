@@ -4,6 +4,8 @@ import { updateUser } from '../firebase/firestore.js'
 import useAuth from '../hooks/useAuth.js'
 import { uploadImageToCloudinary } from '../services/cloudinary'
 
+import '../styles/EditProfile.css'
+
 export default function EditProfile() {
   const { currentUser, setCurrentUser, loading } = useAuth()
 
@@ -13,7 +15,7 @@ export default function EditProfile() {
 
     // actualizar el username en firestore y en el estado de currentUser
     const res = await updateUser(currentUser, { username: newUsername })
-   
+
     if (res) setCurrentUser({ ...currentUser, username: newUsername })
     else console.error('Error updating username')
   }
@@ -47,7 +49,7 @@ export default function EditProfile() {
   }
 
   if (loading) {
-    return <main className='container'>Cargando...</main>
+    return <main className="container">Cargando...</main>
   }
 
   return (
@@ -55,40 +57,56 @@ export default function EditProfile() {
       <HeaderDashboard />
       <h1>My Profile</h1>
 
-      <section>
-        <h2>Username </h2>
-        <p>{currentUser.username}</p>
-        <div>
-          <img src={currentUser.photoURL} alt="your profile image" />
-        </div>
-      </section>
+      <main className="container">
+        <section className="container">
+          <h2>{currentUser.username}</h2>
+          <div>
+            <img
+              className="img-profile"
+              src={currentUser.photoURL}
+              alt="your profile image"
+            />
+          </div>
+        </section>
 
-      {currentUser && (
-        <>
-          <form onSubmit={handleSubmitChangeUsername}>
-            <label>
-              New Username
-              <input
-                type="text"
-                required
-                minLength={3}
-                maxLength={20}
-                pattern="^[A-Za-z]+( [A-Za-z]+)*$"
-                title="Solo letras y sin espacios al comienzo y final."
-              />
-            </label>
-            <button>Confirm</button>
-          </form>
+        {currentUser && (
+          <section className="section-profile container">
+            <form
+              onSubmit={handleSubmitChangeUsername}
+              className="form form-inline"
+            >
+              <label className="form-label">New Username</label>
+              <div className="input-button-row">
+                <input
+                  className="dashboard-input input-username-profile"
+                  placeholder="Enter username"
+                  type="text"
+                  required
+                  minLength={3}
+                  maxLength={20}
+                  pattern="^[A-Za-z]+( [A-Za-z]+)*$"
+                  title="Solo letras y sin espacios al comienzo y final."
+                />
+                <button className="button-profile">Confirm</button>
+              </div>
+            </form>
 
-          <form onSubmit={handleSubmitChangePhoto}>
-            <label>
-              new photo profile
-              <input type="file" required />
-            </label>
-            <button>Confirm</button>
-          </form>
-        </>
-      )}
+            <form
+              onSubmit={handleSubmitChangePhoto}
+              className="form form-inline"
+            >
+              <label className="form-label" htmlFor="picture">
+                New photo profile
+              </label>
+              <div className="input-button-row">
+                <input id="picture" type="file" required />
+                <button className="button-profile">Confirm</button>
+              </div>
+            </form>
+          </section>
+        )}
+      </main>
     </>
   )
 }
+

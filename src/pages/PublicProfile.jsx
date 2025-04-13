@@ -35,12 +35,12 @@ export default function PublicProfile() {
       return `https://${url}`
     }
     return `https://www.${url}`
-  }  
+  }
 
   // mostrar si hay datos
   if (user) {
     return (
-      <>
+      <div className="background">
         <div className="center">
           <img className="img-profile" src={user?.photoURL} alt="profile img" />
         </div>
@@ -60,7 +60,7 @@ export default function PublicProfile() {
             ))}
           </section>
         </main>
-      </>
+      </div>
     )
   }
 }

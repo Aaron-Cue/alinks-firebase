@@ -31,3 +31,18 @@
   color: #ffffff;
 }
 
+.background {
+  position: relative;
+  min-height: 100vh;
+  margin: 0;
+  padding: 3.25rem;
+}
+
+.background::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(125% 125% at 50% 10%, #000 40%, #6633ee 100%);
+  background-attachment: scroll;
+}

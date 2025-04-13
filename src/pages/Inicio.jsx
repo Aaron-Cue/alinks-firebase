@@ -10,7 +10,7 @@ export default function Inicio() {
   }
 
   return (
-    <>
+    <> 
       <header className="header-inicio">
         <div className="header-content">
           <div className="logo">

@@ -58,7 +58,7 @@ export default function EditProfile() {
       <h1>My Profile</h1>
 
       <main className="container">
-        <section className="container">
+        <section className="">
           <h2>{currentUser.username}</h2>
           <div>
             <img
@@ -70,7 +70,7 @@ export default function EditProfile() {
         </section>
 
         {currentUser && (
-          <section className="section-profile container">
+          <section className="section-profile">
             <form
               onSubmit={handleSubmitChangeUsername}
               className="form form-inline"

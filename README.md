@@ -1,22 +1,19 @@
-# 🔗 A-Links App
+🔗 A-Links App  
+A-Links is a web application built with React and Firebase that allows users to sign up, add personal links, and share a public profile with their featured links.
 
-**A-Links** es una aplicación web construida con **React** y **Firebase** que permite a los usuarios registrarse, agregar enlaces personales y compartir un perfil público con sus links destacados.
+⚙️ Technologies Used  
+⚛️ React  
+🔥 Firebase  
+Firebase Authentication  
+Firestore Database  
+☁️ Cloudinary for uploading and storing profile images  
+🌐 React Router DOM for route management  
+🌐 react-toastify for push notifications  
 
-## ⚙️ Tecnologías utilizadas
-
-- ⚛️ [React](https://reactjs.org/)
-- 🔥 [Firebase](https://firebase.google.com/)
-  - Firebase Authentication
-  - Firestore Database
-- ☁️ [Cloudinary](https://cloudinary.com/) para subir y almacenar imágenes de perfil
-- 🌐 [React Router DOM](https://reactrouter.com/) para el manejo de rutas
-- 🌐 [react-toastify](https://www.npmjs.com/package/react-toastify) para notificaciones push
-
-## ✨ Funcionalidades
-
-- 🔐 Login con autorregistro 
-- 📎 Agregar y gestionar tus propios links
-- 🌍 Link público para compartir tu perfil y enlaces -> alinks-firebase.vercel.app/user/YOUR_USER
-- 🧑‍🎨 Editar perfil
-- 🧭 Navegación protegida según estado de autenticación
-- 🔄 Persistencia de sesión
+✨ Features  
+🔐 Sign up with automatic login  
+📎 Add and manage your own links  
+🌍 Public link to share your profile and links -> alinks-firebase.vercel.app/user/YOUR_USER  
+🧑‍🎨 Edit profile  
+🧭 Protected navigation based on authentication status  
+🔄 Session persistence

@@ -23,7 +23,7 @@ export default function Inicio() {
       <main className="container main-inicio">
         <div className="inicio-content">
           <h1 className="h1-inicio">
-            Coloque todos los enlaces necesarios en un solo lugar
+            Coloque todos sus enlaces en un solo lugar
           </h1>
           <p>
             <i>Quiero obtener mis links</i>

@@ -11,13 +11,6 @@ export default function AccessRoute({ type, children }) {
     case 'private':
       return currentUser ? children : <Navigate to="/login" replace />
 
-    case 'public':
-      // si no estoy registrado 
-      if (currentUser && !('username' in currentUser)) {
-        return <Navigate to="/register" replace />
-      }
-      return currentUser ? <Navigate to="/dashboard" replace /> : children
-
     case 'register':
       if (currentUser && ('username' in currentUser)) {
         return <Navigate to="/dashboard" replace />

@@ -20,6 +20,7 @@ export default function PublicProfile() {
 
     if (exists === false) {
       navigate('/user/notFound')
+      return
     }
 
     getUser(username).then(res => {

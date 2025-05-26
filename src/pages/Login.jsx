@@ -2,12 +2,11 @@ import { useNavigate } from 'react-router-dom'
 import { doc, getDoc } from 'firebase/firestore'
 import { loginWithGoogle } from '../firebase/auth'
 import db from '../firebase/firestore'
-import useAuth from '../hooks/useAuth'
 
 import '../styles/Login.css'
 
 export default function Login() {
-  const { loading } = useAuth()
+  
   const navigate = useNavigate()
   const handleLogin = async () => {
     try {
@@ -30,9 +29,7 @@ export default function Login() {
     }
   }
 
-  if (loading) {
-    return <main className='container'>Cargando...</main>
-  }
+ 
 
   return (
     <main className="container">

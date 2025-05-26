@@ -62,7 +62,7 @@ export default function EditProfile() {
           <h2>{currentUser.username}</h2>
           <div>
             <img
-              className="img-profile"
+              className="img-edit-profile"
               src={currentUser.photoURL}
               alt="your profile image"
             />

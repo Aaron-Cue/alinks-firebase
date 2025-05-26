@@ -10,7 +10,7 @@ export default function PublicProfile() {
 
   const [exists, setExists] = useState(null)
   const [user, setUser] = useState(null)
-  
+
   useEffect(() => {
     const lowerUsername = username.toLowerCase()
 
@@ -37,30 +37,43 @@ export default function PublicProfile() {
     return `https://www.${url}`
   }
 
-  // mostrar si hay datos
-  if (user) {
+  if (user === null) {
     return (
       <div className="background">
         <div className="center">
-          <img className="img-profile" src={user?.photoURL} alt="profile img" />
-        </div>
-        <h1 className="h1-public">{user?.username}</h1>
-        <main className="container">
-          <section className="container">
-            {user?.links.map(link => (
-              <a
-                key={link.id}
-                href={normalizeUrl(link.url)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="public-link-card"
-              >
-                <h2 className="public-link-title">{link.title}</h2>
-              </a>
+          <div className="skeleton-img" />
+          <h1 className="skeleton-text">Cargando perfil...</h1>
+          <div className="skeleton-links">
+            {[...Array(3)].map((_, i) => (
+              <div key={i} className="skeleton-link-card" />
             ))}
-          </section>
-        </main>
+          </div>
+        </div>
       </div>
     )
   }
+
+  return (
+    <div className="background">
+      <div className="center">
+        <img className="img-profile" src={user?.photoURL} alt="profile img" />
+      </div>
+      <h1 className="h1-public">{user?.username}</h1>
+      <main className="container">
+        <section className="container">
+          {user?.links.map(link => (
+            <a
+              key={link.id}
+              href={normalizeUrl(link.url)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="public-link-card"
+            >
+              <h2 className="public-link-title">{link.title}</h2>
+            </a>
+          ))}
+        </section>
+      </main>
+    </div>
+  )
 }

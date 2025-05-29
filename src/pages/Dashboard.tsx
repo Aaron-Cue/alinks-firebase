@@ -7,14 +7,20 @@ import useAuth from '../hooks/useAuth'
 
 import '../styles/Dashboard.css'
 
+type Link = {
+  title: string
+  url: string
+  id: `${string}-${string}-${string}-${string}-${string}`
+}
+
 export default function Dashboard() {
   const { currentUser } = useAuth()
 
-  const [links, setLinks] = useState([])
-  const [loading, setLoading] = useState(true)
+  const [links, setLinks] = useState<Link[]>([])
+  const [loading, setLoading] = useState<boolean>(true)
 
-  const titleRef = useRef()
-  const urlRef = useRef()
+  const titleRef = useRef<HTMLInputElement>(null)
+  const urlRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     const fetchLinks = async () => {
@@ -28,18 +34,25 @@ export default function Dashboard() {
     fetchLinks()
   }, [currentUser])
 
-  const handleSubmitCreateLink = async e => {
+  const handleSubmitCreateLink = async (
+    e: React.FormEvent<HTMLFormElement>
+  ) => {
     e.preventDefault()
-    const title = titleRef.current.value
-    const url = urlRef.current.value
+    const title = titleRef.current?.value ?? ''
+    const url = urlRef.current?.value ?? ''
     const id = crypto.randomUUID()
     const link = { title, url, id }
 
-    const updatedLinks = [...links, link]
+    const updatedLinks = [...links, link] 
     // local
     setLinks(updatedLinks)
+
     // firestore
     await updateUser(currentUser, { links: updatedLinks })
+
+    // limpiar inputs
+    if (!titleRef.current || !urlRef.current) return
+
     titleRef.current.value = ''
     urlRef.current.value = ''
   }

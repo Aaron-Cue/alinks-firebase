@@ -8,6 +8,7 @@ import '../styles/Login.css'
 export default function Login() {
   
   const navigate = useNavigate()
+
   const handleLogin = async () => {
     try {
       const user = await loginWithGoogle()
@@ -16,11 +17,10 @@ export default function Login() {
 
       if (!userSnap.exists()) {
         // redireccionar a register
-
         navigate('/register')
-
         return
       }
+      
       // aqui el user esta registrado e hizo login
       // redireccionar a dashboard
       navigate('/dashboard')
@@ -28,8 +28,6 @@ export default function Login() {
       console.error('Error al iniciar sesion:', error)
     }
   }
-
- 
 
   return (
     <main className="container">

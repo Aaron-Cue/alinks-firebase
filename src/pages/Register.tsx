@@ -10,14 +10,14 @@ import '../styles/Register.css'
 export default function Register() {
   const navigate = useNavigate()
   const { currentUser, setCurrentUser, loading } = useAuth()
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     setIsLoading(true)
 
-    const form = e.target
+    const form = e.currentTarget
     const formData = new FormData(form)
     const username = formData.get('username')
 

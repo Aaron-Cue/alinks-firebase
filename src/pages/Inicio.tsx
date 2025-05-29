@@ -5,6 +5,7 @@ import '../styles/Inicio.css'
 
 export default function Inicio() {
   const navigate = useNavigate()
+  
   const handleClickGoLogin = () => {
     navigate('/login')
   }
@@ -14,7 +15,7 @@ export default function Inicio() {
       <header className="header-inicio">
         <div className="header-content">
           <div className="logo">
-            <img src="/assets/logo.png" alt="" />
+            <img src="/assets/logo.png" alt="logo de la app" />
             A-Links
           </div>
           <Button onClick={handleClickGoLogin}>Iniciar Sesion</Button>
@@ -31,7 +32,7 @@ export default function Inicio() {
           <Button onClick={handleClickGoLogin}>Crear Cuenta</Button>
         </div>
         <div className="screen">
-          <img src="/assets/imageApp.webp" alt="" />
+          <img src="/assets/imageApp.webp" alt="previsualizacion de la app" />
         </div>
       </main>
     </>

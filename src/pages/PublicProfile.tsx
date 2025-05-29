@@ -4,12 +4,25 @@ import { getUser, usernameExists } from '../firebase/firestore'
 
 import '../styles/PublicProfile.css'
 
+type User = {
+  displayName: string
+  email: string
+  photoURL: string
+  uid: string
+  username: string
+  links: {
+    id: `${string}-${string}-${string}-${string}-${string}`
+    title: string
+    url: string
+  }[]
+}
+
 export default function PublicProfile() {
   const navigate = useNavigate()
   const { username } = useParams()
 
-  const [exists, setExists] = useState(null)
-  const [user, setUser] = useState(null)
+  const [exists, setExists] = useState<boolean | null>(null)
+  const [user, setUser] = useState<User | null>(null)
 
   useEffect(() => {
     const lowerUsername = username.toLowerCase()
@@ -28,7 +41,7 @@ export default function PublicProfile() {
     })
   }, [username, exists, navigate])
 
-  const normalizeUrl = url => {
+  const normalizeUrl = (url : string)  => {
     if (url.startsWith('https://')) {
       return url
     } else if (url.startsWith('www')) {
@@ -36,7 +49,7 @@ export default function PublicProfile() {
     }
     return `https://www.${url}`
   }
-
+  console.log(user)
   if (user === null) {
     return (
       <div className="background">

@@ -9,9 +9,12 @@ import '../styles/EditProfile.css'
 export default function EditProfile() {
   const { currentUser, setCurrentUser, loading } = useAuth()
 
-  const handleSubmitChangeUsername = async e => {
+  const handleSubmitChangeUsername = async (
+    e: React.FormEvent<HTMLFormElement>
+  ) => {
     e.preventDefault()
-    const newUsername = e.target[0].value
+    const formData = new FormData(e.currentTarget)
+    const newUsername = formData.get('username')
 
     // actualizar el username en firestore y en el estado de currentUser
     const res = await updateUser(currentUser, { username: newUsername })
@@ -20,9 +23,17 @@ export default function EditProfile() {
     else console.error('Error updating username')
   }
 
-  const handleSubmitChangePhoto = async e => {
+  const handleSubmitChangePhoto = async (
+    e: React.FormEvent<HTMLFormElement>
+  ) => {
     e.preventDefault()
-    const file = e.target[0].files[0]
+    const formData = new FormData(e.currentTarget)
+    const file = formData.get('picture')
+
+    if (!(file instanceof File)) {
+      toast.error('No se ha seleccionado un archivo válido', { theme: 'dark' })
+      return
+    }
 
     // validaciones
     const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/webp']
@@ -99,7 +110,7 @@ export default function EditProfile() {
                 New photo profile
               </label>
               <div className="input-button-row">
-                <input id="picture" type="file" required />
+                <input id="picture" name='picture' type="file" required />
                 <button className="button-profile">Confirm</button>
               </div>
             </form>

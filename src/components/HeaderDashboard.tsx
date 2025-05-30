@@ -6,7 +6,7 @@ import { logout } from '../firebase/auth'
 import '../styles/HeaderDashboard.css'
 
 export default function HeaderDashboard() {
-  const [disabled, setDisabled] = useState(false)
+  const [disabled, setDisabled] = useState<boolean>(false)
   const navigate = useNavigate()
 
   const handleLogout = async () => {

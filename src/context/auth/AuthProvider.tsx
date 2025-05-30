@@ -1,7 +1,11 @@
 import { useFirebaseAuth } from '../../hooks/useFirebaseAuth'
 import { AuthContext } from './Auth'
 
-export default function AuthProvider({ children }) {
+interface AuthProviderProps {
+  children: React.ReactNode;
+}
+
+export default function AuthProvider({ children } : AuthProviderProps) {
   const { currentUser, setCurrentUser, loading } = useFirebaseAuth()
 
   return (

@@ -4,14 +4,9 @@ import HeaderDashboard from '../components/HeaderDashboard'
 import Links from '../components/Links'
 import { getLinksUser, updateUser } from '../firebase/firestore'
 import useAuth from '../hooks/useAuth'
+import { Link } from '../types/user'
 
 import '../styles/Dashboard.css'
-
-type Link = {
-  title: string
-  url: string
-  id: `${string}-${string}-${string}-${string}-${string}`
-}
 
 export default function Dashboard() {
   const { currentUser } = useAuth()

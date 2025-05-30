@@ -1,28 +1,16 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { getUser, usernameExists } from '../firebase/firestore'
+import { FirestoreUser } from '../types/user'
 
 import '../styles/PublicProfile.css'
-
-type User = {
-  displayName: string
-  email: string
-  photoURL: string
-  uid: string
-  username: string
-  links: {
-    id: `${string}-${string}-${string}-${string}-${string}`
-    title: string
-    url: string
-  }[]
-}
 
 export default function PublicProfile() {
   const navigate = useNavigate()
   const { username } = useParams()
 
   const [exists, setExists] = useState<boolean | null>(null)
-  const [user, setUser] = useState<User | null>(null)
+  const [user, setUser] = useState<FirestoreUser | null>(null)
 
   useEffect(() => {
     const lowerUsername = username.toLowerCase()
@@ -49,7 +37,7 @@ export default function PublicProfile() {
     }
     return `https://www.${url}`
   }
-  console.log(user)
+
   if (user === null) {
     return (
       <div className="background">

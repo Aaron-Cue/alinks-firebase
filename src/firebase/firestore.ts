@@ -1,4 +1,5 @@
 import { toast } from 'react-toastify'
+import type { DocumentData } from 'firebase/firestore'
 import {
   collection,
   doc,
@@ -10,14 +11,14 @@ import {
   updateDoc,
   where
 } from 'firebase/firestore'
+import { DataUser, FirestoreUser, Link } from '../types/user'
 import app from './config.js'
 
 const db = getFirestore(app)
 
-export const usernameAvailable = async username => {
+export const usernameAvailable = async (username: string): Promise<boolean> => {
   try {
     const usersRef = collection(db, 'users')
-
     const q = query(usersRef, where('username', '==', username))
     const querySnap = await getDocs(q)
 
@@ -28,12 +29,15 @@ export const usernameAvailable = async username => {
   }
 }
 
-export const usernameExists = async username => {
+export const usernameExists = async (username: string): Promise<boolean> => {
   const res = await usernameAvailable(username)
   return !res
 }
 
-export const registerUser = async (user, username) => {
+export const registerUser = async (
+  user: FirestoreUser,
+  username: string
+): Promise<boolean> => {
   try {
     const userRef = doc(db, 'users', user.uid)
 
@@ -51,9 +55,11 @@ export const registerUser = async (user, username) => {
   }
 }
 
-export const updateUser = async (user, data) => {
+export const updateUser = async (
+  user: FirestoreUser,
+  data: DataUser
+): Promise<boolean> => {
   try {
-
     if (data.username) {
       // chequear si esta disponible
       const available = await usernameAvailable(data.username)
@@ -66,9 +72,9 @@ export const updateUser = async (user, data) => {
         return false
       }
     }
-    
+
     const userRef = doc(db, 'users', user.uid)
-    
+
     await updateDoc(userRef, {
       ...data
     })
@@ -80,13 +86,15 @@ export const updateUser = async (user, data) => {
     })
     return true
   } catch (error) {
-    toast.error('Hubo un error al actualizar. Intenta de nuevo.', {position: 'bottom-right'})
+    toast.error('Hubo un error al actualizar. Intenta de nuevo.', {
+      position: 'bottom-right'
+    })
     console.error('Error updating user:', error)
     return false
   }
 }
 
-export const getLinksUser = async user => {
+export const getLinksUser = async (user: FirestoreUser): Promise<Link[]> => {
   try {
     const userRef = doc(db, 'users', user.uid)
     const userSnap = await getDoc(userRef)
@@ -94,7 +102,7 @@ export const getLinksUser = async user => {
     if (!userData?.links) {
       return []
     }
-
+    
     return userData?.links
   } catch (error) {
     console.error('Error getting user links:', error)
@@ -102,7 +110,9 @@ export const getLinksUser = async user => {
   }
 }
 
-export const getUser = async username => {
+export const getUser = async (
+  username: string
+): Promise<DocumentData | null> => {
   try {
     const usersRef = collection(db, 'users')
     const q = query(usersRef, where('username', '==', username))

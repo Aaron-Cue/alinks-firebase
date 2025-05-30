@@ -1,12 +1,17 @@
 import { updateUser } from '../firebase/firestore'
 import useAuth from '../hooks/useAuth'
+import { Link } from '../types/user'
 
 import '../styles/Links.css'
 
-export default function Links({ linksRender, setLinksRender }) {
-  const { currentUser } = useAuth()
+interface LinksProps {
+  linksRender: Link[]
+  setLinksRender: React.Dispatch<React.SetStateAction<Link[]>>
+}
 
-  const deleteLink = id => {
+export default function Links({ linksRender, setLinksRender }: LinksProps) {
+  const { currentUser } = useAuth()
+  const deleteLink = (id: string) => {
     const updatedLinks = linksRender.filter(link => link.id !== id)
     setLinksRender(updatedLinks)
     updateUser(currentUser, { links: updatedLinks })

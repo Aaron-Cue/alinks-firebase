@@ -1,7 +1,7 @@
 import { toast } from 'react-toastify'
 import HeaderDashboard from '../components/HeaderDashboard'
-import { updateUser } from '../firebase/firestore.js'
-import useAuth from '../hooks/useAuth.js'
+import { updateUser } from '../firebase/firestore'
+import useAuth from '../hooks/useAuth'
 import { uploadImageToCloudinary } from '../services/cloudinary'
 
 import '../styles/EditProfile.css'

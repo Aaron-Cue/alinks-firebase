@@ -6,8 +6,14 @@ import { auth } from '../firebase/auth'
 import db from '../firebase/firestore'
 import { AuthContextType } from '../types/auth'
 
+type ExtendedFirebaseUser = FirebaseUser & {
+  username?: string
+}
+
 export function useFirebaseAuth(): AuthContextType {
-  const [currentUser, setCurrentUser] = useState<FirebaseUser | null>(null)
+  const [currentUser, setCurrentUser] = useState<ExtendedFirebaseUser | null>(
+    null
+  )
   const [loading, setLoading] = useState<boolean>(true)
 
   useEffect(() => {

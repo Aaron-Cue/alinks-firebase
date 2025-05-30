@@ -11,7 +11,8 @@ import {
   updateDoc,
   where
 } from 'firebase/firestore'
-import { DataUser, FirestoreUser, Link } from '../types/user'
+import { ExtendedFirebaseUser } from '../types/auth'
+import { DataUser, Link } from '../types/user'
 import app from './config.js'
 
 const db = getFirestore(app)
@@ -35,7 +36,7 @@ export const usernameExists = async (username: string): Promise<boolean> => {
 }
 
 export const registerUser = async (
-  user: FirestoreUser,
+  user: ExtendedFirebaseUser,
   username: string
 ): Promise<boolean> => {
   try {
@@ -56,7 +57,7 @@ export const registerUser = async (
 }
 
 export const updateUser = async (
-  user: FirestoreUser,
+  user: ExtendedFirebaseUser,
   data: DataUser
 ): Promise<boolean> => {
   try {
@@ -94,7 +95,9 @@ export const updateUser = async (
   }
 }
 
-export const getLinksUser = async (user: FirestoreUser): Promise<Link[]> => {
+export const getLinksUser = async (
+  user: ExtendedFirebaseUser
+): Promise<Link[]> => {
   try {
     const userRef = doc(db, 'users', user.uid)
     const userSnap = await getDoc(userRef)
@@ -102,7 +105,7 @@ export const getLinksUser = async (user: FirestoreUser): Promise<Link[]> => {
     if (!userData?.links) {
       return []
     }
-    
+
     return userData?.links
   } catch (error) {
     console.error('Error getting user links:', error)

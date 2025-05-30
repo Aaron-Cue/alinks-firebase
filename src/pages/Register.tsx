@@ -36,10 +36,17 @@ export default function Register() {
       })
       return
     }
-
-
     
     // si no esta en uso, registrar el user en firestore y actualizar el estado de currentUser
+    if (!currentUser) {
+      toast.error('No se ha encontrado el usuario actual.', {
+        position: 'top-center',
+        autoClose: 2000,
+        theme: 'dark'
+      })
+      setIsLoading(false)
+      return
+    }
     const result = await registerUser(currentUser, username)
     if (!result) {
       toast.error('Error al registrar el usuario.', {

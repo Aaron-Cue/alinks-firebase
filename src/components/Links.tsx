@@ -14,6 +14,10 @@ export default function Links({ linksRender, setLinksRender }: LinksProps) {
   const deleteLink = (id: string) => {
     const updatedLinks = linksRender.filter(link => link.id !== id)
     setLinksRender(updatedLinks)
+    if (!currentUser) {
+      console.error('No current user found')
+      return
+    }
     updateUser(currentUser, { links: updatedLinks })
   }
 

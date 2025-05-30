@@ -43,6 +43,10 @@ export default function Dashboard() {
     setLinks(updatedLinks)
 
     // firestore
+    if (!currentUser) {
+      console.error('No current user found')
+      return
+    }
     await updateUser(currentUser, { links: updatedLinks })
 
     // limpiar inputs

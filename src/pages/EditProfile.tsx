@@ -14,13 +14,18 @@ export default function EditProfile() {
   ) => {
     e.preventDefault()
     const formData = new FormData(e.currentTarget)
-    const newUsername = formData.get('username')
+    const newUsername = formData.get('username') as string
 
     // actualizar el username en firestore y en el estado de currentUser
+    if (!currentUser) {
+      toast.error('No se ha encontrado el usuario actual', { theme: 'dark' })
+      return
+    }
     const res = await updateUser(currentUser, { username: newUsername })
 
-    if (res) setCurrentUser({ ...currentUser, username: newUsername })
-    else console.error('Error updating username')
+    if (res) {
+      setCurrentUser({ ...currentUser, username: newUsername })
+    } else console.error('Error updating username')
   }
 
   const handleSubmitChangePhoto = async (
@@ -55,6 +60,9 @@ export default function EditProfile() {
       console.error('Error uploading image')
     }
 
+    if (!currentUser) {
+      return
+    }
     await updateUser(currentUser, { photoURL: url })
     setCurrentUser({ ...currentUser, photoURL: url })
   }
@@ -70,11 +78,11 @@ export default function EditProfile() {
 
       <main className="container">
         <section className="">
-          <h2>{currentUser.username}</h2>
+          <h2>{currentUser?.username}</h2>
           <div>
             <img
               className="img-edit-profile"
-              src={currentUser.photoURL}
+              src={currentUser?.photoURL ?? '../../public/assets/logo.png'}
               alt="your profile image"
             />
           </div>
@@ -92,6 +100,7 @@ export default function EditProfile() {
                   className="dashboard-input input-username-profile"
                   placeholder="Enter username"
                   type="text"
+                  name="username"
                   required
                   minLength={3}
                   maxLength={20}
@@ -110,7 +119,7 @@ export default function EditProfile() {
                 New photo profile
               </label>
               <div className="input-button-row">
-                <input id="picture" name='picture' type="file" required />
+                <input id="picture" name="picture" type="file" required />
                 <button className="button-profile">Confirm</button>
               </div>
             </form>
@@ -120,4 +129,3 @@ export default function EditProfile() {
     </>
   )
 }
-

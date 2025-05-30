@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+import type { DocumentData } from 'firebase/firestore'
 import { getUser, usernameExists } from '../firebase/firestore'
-import { FirestoreUser } from '../types/user'
+import { FirestoreUser, Link } from '../types/user'
 
 import '../styles/PublicProfile.css'
 
@@ -10,9 +11,10 @@ export default function PublicProfile() {
   const { username } = useParams()
 
   const [exists, setExists] = useState<boolean | null>(null)
-  const [user, setUser] = useState<FirestoreUser | null>(null)
+  const [user, setUser] = useState<FirestoreUser | DocumentData | null>(null)
 
   useEffect(() => {
+    if (!username) return
     const lowerUsername = username.toLowerCase()
 
     usernameExists(lowerUsername).then(res => {
@@ -29,7 +31,7 @@ export default function PublicProfile() {
     })
   }, [username, exists, navigate])
 
-  const normalizeUrl = (url : string)  => {
+  const normalizeUrl = (url: string) => {
     if (url.startsWith('https://')) {
       return url
     } else if (url.startsWith('www')) {
@@ -62,7 +64,7 @@ export default function PublicProfile() {
       <h1 className="h1-public">{user?.username}</h1>
       <main className="container">
         <section className="container">
-          {user?.links.map(link => (
+          {user?.links.map((link : Link) => (
             <a
               key={link.id}
               href={normalizeUrl(link.url)}

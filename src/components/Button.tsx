@@ -1,8 +1,8 @@
 import '../styles/Button.css'
 
 interface ButtonProps {
-  onClick: () => void
-  children: React.ReactNode
+  onClick?: () => void
+  children?: React.ReactNode
   disabled?: boolean
 }
 

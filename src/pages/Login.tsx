@@ -12,6 +12,10 @@ export default function Login() {
   const handleLogin = async () => {
     try {
       const user = await loginWithGoogle()
+      if (!user) {
+        console.error('No se pudo iniciar sesión con Google')
+        return
+      }
       const userRef = doc(db, 'users', user.uid)
       const userSnap = await getDoc(userRef)
 

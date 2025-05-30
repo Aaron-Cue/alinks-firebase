@@ -21,6 +21,10 @@ export default function Register() {
     const formData = new FormData(form)
     const username = formData.get('username')
 
+    if (typeof username !== 'string') {
+      throw new Error('Username is required')
+    }
+
     // chequear que el username no este en uso.
     const available = await usernameAvailable(username)
     if (!available) {
@@ -33,6 +37,8 @@ export default function Register() {
       return
     }
 
+
+    
     // si no esta en uso, registrar el user en firestore y actualizar el estado de currentUser
     const result = await registerUser(currentUser, username)
     if (!result) {

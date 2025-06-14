@@ -14,47 +14,57 @@ const UserNotFound = lazy(() => import('../pages/UserNotFound'))
 
 export default function AppRoutes() {
   return (
-    <Suspense fallback={<h1>Loading...</h1>}>
-      <Routes>
-        {/* Rutas públicas */}
-        <Route path="/" element={<Inicio />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="user/:username" element={<PublicProfile />} />
-        <Route path="user/notFound" element={<UserNotFound />} />
-        <Route path="*" element={<NotFound />} />
+    <Routes>
+      <Route path="/" element={<Inicio />} />
 
-        {/* Rutas privadas */}
-        <Route
-          path="/dashboard"
-          element={
+      <Route path="/login" element={<Login />} />
+      <Route path="user/:username" element={<PublicProfile />} />
+      <Route path="user/notFound" element={<UserNotFound />} />
+      <Route
+        path="*"
+        element={
+          <Suspense fallback={<h1>Loading...</h1>}>
+            <NotFound />
+          </Suspense>
+        }
+      />
+
+      <Route
+        path="/dashboard"
+        element={
+          <Suspense fallback={<h1>Loading...</h1>}>
             <AuthProvider>
               <AccessRoute type="private">
                 <Dashboard />
               </AccessRoute>
             </AuthProvider>
-          }
-        />
-        <Route
-          path="/dashboard/profile"
-          element={
+          </Suspense>
+        }
+      />
+      <Route
+        path="/dashboard/profile"
+        element={
+          <Suspense fallback={<h1>Loading...</h1>}>
             <AuthProvider>
               <AccessRoute type="private">
                 <EditProfile />
               </AccessRoute>
             </AuthProvider>
-          }
-        />
-        <Route
-          path="/register"
-          element={
+          </Suspense>
+        }
+      />
+      <Route
+        path="/register"
+        element={
+          <Suspense fallback={<h1>Loading...</h1>}>
             <AuthProvider>
               <AccessRoute type="register">
                 <Register />
               </AccessRoute>
             </AuthProvider>
-          }
-        />
-      </Routes>
-    </Suspense>
+          </Suspense>
+        }
+      />
+    </Routes>
   )
 }
